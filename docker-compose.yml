@@ -1,8 +1,8 @@
 version: '2'
+
 services:
     elasticsearch:
-      image: elasticsearch:5
-      command: elasticsearch
+      build: elasticsearch/
       environment:
         # This helps ES out with memory usage
         - ES_JAVA_OPTS=-Xmx1g -Xms1g
@@ -14,35 +14,49 @@ services:
       ports:
         - "9200:9200"
         - "9300:9300"
+      networks:
+        - elk
 
     logstash:
-      image: logstash:5
-      command: logstash --auto-reload -w 4 -f /etc/logstash/conf.d/logstash.conf
+      build: logstash/
       environment:
         # This helps Logstash out if it gets too busy
         - LS_HEAP_SIZE=2048m
       volumes:
         # volume mount the logstash config
-        - ./logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf
+        - ./logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+        - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       ports:
-        # GELF port for Docker logs
-        - "12201:12201/udp"
         # UDP port for syslogs
         - "5000:5000/udp"
         # Default TCP port
         - "5001:5001"
+      networks:
+        - elk
       links:
+        - elasticsearch
+      depends_on:
         - elasticsearch
 
     kibana:
-      image: kibana:5
+      build: kibana/
       environment:
         # Point Kibana to the elasticsearch container
         - ELASTICSEARCH_URL=http://elasticsearch:9200
+      volumes:
+        - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
       ports:
         - "5601:5601"
+      networks:
+        - elk
       links:
         - elasticsearch
+      depends_on:
+        - elasticsearch
 
+networks:
+    elk:
+        driver: bridge
+    
 volumes:
-  elasticsearch:
+    elasticsearch: /usr/share/elasticsearch/data
