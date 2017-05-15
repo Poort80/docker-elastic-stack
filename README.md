@@ -42,15 +42,16 @@ exit
 ## 3. Check Prerequisites
 
 $ sudodocker -v
+
 $ sudodocker-compose -v
 
 
 
 ## Official guidelines
 
-E https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
-L https://www.elastic.co/guide/en/logstash/5.4/_pulling_the_image.html
-K https://www.elastic.co/guide/en/kibana/5.4/_configuring_kibana_on_docker.html
+https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+https://www.elastic.co/guide/en/logstash/5.4/_pulling_the_image.html
+https://www.elastic.co/guide/en/kibana/5.4/_configuring_kibana_on_docker.html
 
 
 
