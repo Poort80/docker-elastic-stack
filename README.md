@@ -30,20 +30,20 @@ $ sudo docker run hello-world
 
 ## 2. Install docker Compose: https://docs.docker.com/compose/install/
 
-(exit current user) sudo -i
+(exit current user) $ sudo -i
 
-curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+$ curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
-sudo chmod +x /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 
-exit
+$ sudo exit
 
 
 ## 3. Check Prerequisites
 
-$ sudodocker -v
+$ sudo docker -v
 
-$ sudodocker-compose -v
+$ sudo docker-compose -v
 
 
 
@@ -52,6 +52,18 @@ $ sudodocker-compose -v
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 https://www.elastic.co/guide/en/logstash/5.4/_pulling_the_image.html
 https://www.elastic.co/guide/en/kibana/5.4/_configuring_kibana_on_docker.html
+
+
+## Community guidelines
+
+https://thepracticalsysadmin.com/elk-5-on-docker/
+
+https://github.com/jmreicha/elk-docker/
+https://github.com/deviantony/docker-elk
+
+https://elk-docker.readthedocs.io/
+https://github.com/spujadas/elk-docker
+https://hub.docker.com/r/sebp/elk/~/dockerfile/
 
 
 
