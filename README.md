@@ -46,6 +46,33 @@ $ sudo docker -v
 $ sudo docker-compose -v
 
 
+## 4. Clone this git repository
+
+$ sudo git clone https://github.com/Poort80/docker-elastic-stack.git ~/p80-docker-elastic-stack
+
+
+## 5. Run docker-compose in detached mode
+
+$ cd ~/p80-docker-elastic-stack
+
+$ sudo docker-compose up -d
+
+(optionally inject log files for Logstash) $ sudo nc localhost 5000 < /path/to/logfile.log
+
+By default, the stack exposes the following ports:
+
+5000: Logstash TCP input.
+9200: Elasticsearch HTTP
+9300: Elasticsearch TCP transport
+5601: Kibana
+
+
+## 6. Check if containers are running
+
+$ sudo docker ps -a
+
+Kibana should be available in web browser: http://localhost:5601 locally or http://your-project-name.lan.p80.nl:5601
+
 
 ## Official guidelines
 
@@ -66,6 +93,16 @@ https://github.com/spujadas/elk-docker
 https://hub.docker.com/r/sebp/elk/~/dockerfile/
 
 
+## Override for specific project
 
+Every P80 project could have it's own Git repository with custom overrides for docker-compose.yml
+
+If provided the file 'docker-compose.override.yml' will be automatically used by docker-compose according as described: https://docs.docker.com/compose/extends/#example-use-case
+
+Moreover, we can speficy custom overrides (i.e. Production-like) by adding custom files:
+
+'docker-compose.<environment>.yml' and then inject them as follows:
+
+$ sudo docker-compose -f docker-compose.yml -f docker-compose.<environment>.yml up -d
 
 
